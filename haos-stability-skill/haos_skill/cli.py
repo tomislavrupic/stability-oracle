@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from typing import Any, Sequence
 
+from .oracle import build_default_engine
 from .skill import evaluate_structure, load_schema, scan_structure
 from .safety import SkillError
 
@@ -47,12 +48,12 @@ def main(argv: Sequence[str] = ()) -> None:
     try:
         if args.command == "evaluate":
             payload = _load_json_file(args.state_file)
-            _emit_json(evaluate_structure(payload, timeout=args.timeout))
+            _emit_json(_evaluate_payload(payload, timeout=args.timeout))
             return
 
         if args.command == "scan":
             payload = _load_json_file(args.grid_file)
-            _emit_json(scan_structure(payload, timeout=args.timeout))
+            _emit_json(_scan_payload(payload, timeout=args.timeout))
             return
 
         if args.command == "schema":
@@ -77,6 +78,41 @@ def _emit_json(payload: Any, pretty: bool = False) -> None:
         print(json.dumps(payload, indent=2, sort_keys=False))
         return
     print(json.dumps(payload, separators=(",", ":"), sort_keys=False))
+
+
+def _evaluate_payload(payload: dict[str, Any], timeout: float) -> Any:
+    if _looks_like_transition_payload(payload):
+        engine = build_default_engine()
+        return engine.evaluate_transition(payload["before"], payload["after"]).to_dict()
+    if _looks_like_perturbation_payload(payload):
+        engine = build_default_engine()
+        return engine.evaluate(payload["before"], payload["perturbation"]).to_dict()
+    return evaluate_structure(payload, timeout=timeout)
+
+
+def _scan_payload(payload: dict[str, Any], timeout: float) -> Any:
+    if _looks_like_engine_scan_payload(payload):
+        engine = build_default_engine()
+        _ = timeout
+        return [result.to_dict() for result in engine.scan(payload["before"], payload["perturbations"])]
+    return scan_structure(payload, timeout=timeout)
+
+
+def _looks_like_transition_payload(payload: dict[str, Any]) -> bool:
+    return "before" in payload and "after" in payload
+
+
+def _looks_like_perturbation_payload(payload: dict[str, Any]) -> bool:
+    return "before" in payload and "perturbation" in payload
+
+
+def _looks_like_engine_scan_payload(payload: dict[str, Any]) -> bool:
+    perturbations = payload.get("perturbations")
+    return (
+        "before" in payload
+        and isinstance(perturbations, Sequence)
+        and not isinstance(perturbations, (str, bytes, bytearray))
+    )
 
 
 if __name__ == "__main__":

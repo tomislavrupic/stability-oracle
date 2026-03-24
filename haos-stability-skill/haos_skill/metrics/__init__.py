@@ -6,6 +6,17 @@ from .geometric_integrity import GeometricIntegrityMetric
 from .structural_retention import StructuralRetentionMetric
 from .temporal_consistency import TemporalConsistencyMetric
 
+
+def build_default_metric_registry() -> MetricRegistry:
+    return MetricRegistry(
+        (
+            StructuralRetentionMetric(),
+            TemporalConsistencyMetric(),
+            CausalDeformationMetric(),
+            GeometricIntegrityMetric(),
+        )
+    )
+
 __all__ = [
     "CausalDeformationMetric",
     "GeometricIntegrityMetric",
@@ -13,4 +24,5 @@ __all__ = [
     "StabilityMetric",
     "StructuralRetentionMetric",
     "TemporalConsistencyMetric",
+    "build_default_metric_registry",
 ]

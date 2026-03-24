@@ -63,8 +63,10 @@ with a continuous confidence signal for downstream planning loops.
 1. [Evaluation Layer Diagram (PNG)](./assets/stability-oracle-evaluation-layer-overview.png)
 2. [Overview Paper (PDF)](./assets/stability-oracle-overview.pdf)
 3. [Numbered Documentation Paper (PDF)](./assets/01-stability-oracle-documentation-paper.pdf)
-4. [Concept Document](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
-5. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
+4. [Oracle Engine v2 And Routing Paper (PDF)](./assets/02-oracle-engine-v2-and-deterministic-routing-paper.pdf)
+5. [Oracle Paradigm Reference (PDF)](./assets/the-oracle-paradigm.pdf)
+6. [Concept Document](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
+7. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
 
 ## Current Contract
 
@@ -91,6 +93,8 @@ The project is advancing through small operational steps:
 - invariant language layer
 - pluggable metric interface
 - deterministic classification policy
+- Oracle Engine v2
+- deterministic routing layer
 - public demo and scan surfaces
 - agent skill integration
 

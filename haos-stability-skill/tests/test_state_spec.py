@@ -56,6 +56,22 @@ class StateSpecTests(unittest.TestCase):
                 "geometric_integrity": 0.85,
             },
             policy_version="v1_floor_mean_band",
+            trace={
+                "input_node_count": 4,
+                "input_edge_count": 3,
+                "output_node_count": 4,
+                "output_edge_count": 3,
+                "normalized_vector": {
+                    "structural_retention": 0.9,
+                    "temporal_consistency": 0.8,
+                    "causal_stability": 0.9,
+                    "geometric_integrity": 0.85,
+                },
+                "coherence_score": 0.8375,
+                "spread": 0.1,
+                "floor_triggered": False,
+                "policy_version": "v1_floor_mean_band",
+            },
         )
 
         self.assertEqual(
@@ -83,6 +99,22 @@ class StateSpecTests(unittest.TestCase):
                     "geometric_integrity": 0.85,
                 },
                 "policy_version": "v1_floor_mean_band",
+                "trace": {
+                    "input_node_count": 4,
+                    "input_edge_count": 3,
+                    "output_node_count": 4,
+                    "output_edge_count": 3,
+                    "normalized_vector": {
+                        "structural_retention": 0.9,
+                        "temporal_consistency": 0.8,
+                        "causal_stability": 0.9,
+                        "geometric_integrity": 0.85,
+                    },
+                    "coherence_score": 0.8375,
+                    "spread": 0.1,
+                    "floor_triggered": False,
+                    "policy_version": "v1_floor_mean_band",
+                },
             },
         )
 

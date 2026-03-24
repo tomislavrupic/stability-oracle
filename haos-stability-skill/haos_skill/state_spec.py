@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Dict, Mapping, Optional, Sequence, Tuple, Union
 
 
@@ -18,6 +18,17 @@ NORMALIZED_METRIC_KEYS = (
     "temporal_consistency",
     "causal_stability",
     "geometric_integrity",
+)
+TRACE_KEYS = (
+    "input_node_count",
+    "input_edge_count",
+    "output_node_count",
+    "output_edge_count",
+    "normalized_vector",
+    "coherence_score",
+    "spread",
+    "floor_triggered",
+    "policy_version",
 )
 
 
@@ -187,25 +198,16 @@ class OracleResult:
     metric_vector: Dict[str, float]
     normalized_vector: Dict[str, float]
     policy_version: str
+    trace: Dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         normalized = str(self.classification).strip().lower()
         if normalized not in VALID_CLASSIFICATIONS:
-            raise ValueError(
-                "classification must be one of %s" % ", ".join(VALID_CLASSIFICATIONS)
-            )
+            raise ValueError("classification must be one of %s" % ", ".join(VALID_CLASSIFICATIONS))
         object.__setattr__(self, "classification", normalized)
         object.__setattr__(self, "confidence", _coerce_unit_interval(self.confidence, "confidence"))
-        object.__setattr__(
-            self,
-            "coherence_score",
-            _coerce_unit_interval(self.coherence_score, "coherence_score"),
-        )
-        object.__setattr__(
-            self,
-            "metric_vector",
-            _coerce_metric_vector(self.metric_vector, RAW_METRIC_KEYS),
-        )
+        object.__setattr__(self, "coherence_score", _coerce_unit_interval(self.coherence_score, "coherence_score"))
+        object.__setattr__(self, "metric_vector", _coerce_metric_vector(self.metric_vector, RAW_METRIC_KEYS))
         object.__setattr__(
             self,
             "normalized_vector",
@@ -215,6 +217,7 @@ class OracleResult:
         if not policy_version:
             raise ValueError("policy_version must be a non-empty string")
         object.__setattr__(self, "policy_version", policy_version)
+        object.__setattr__(self, "trace", _coerce_trace_payload(self.trace))
 
     @classmethod
     def from_dict(cls, payload: Mapping[str, Any]) -> "OracleResult":
@@ -228,10 +231,11 @@ class OracleResult:
             metric_vector=_as_required_mapping(payload.get("metric_vector"), "metric_vector"),
             normalized_vector=_as_required_mapping(payload.get("normalized_vector"), "normalized_vector"),
             policy_version=payload["policy_version"],
+            trace=payload.get("trace", {}),
         )
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
+        payload = {
             "classification": self.classification,
             "metrics": self.metrics.to_dict(),
             "confidence": self.confidence,
@@ -240,9 +244,13 @@ class OracleResult:
             "normalized_vector": dict(self.normalized_vector),
             "policy_version": self.policy_version,
         }
+        if self.trace:
+            payload["trace"] = dict(self.trace)
+        return payload
 
 
 StateLike = Union[State, Mapping[str, Any]]
+PerturbationLike = Union[Perturbation, Mapping[str, Any]]
 
 
 def coerce_state(value: StateLike) -> State:
@@ -253,6 +261,16 @@ def coerce_state(value: StateLike) -> State:
 
 def coerce_state_payload(value: StateLike) -> Dict[str, Any]:
     return coerce_state(value).to_dict()
+
+
+def coerce_perturbation(value: PerturbationLike) -> Perturbation:
+    if isinstance(value, Perturbation):
+        return value
+    return Perturbation.from_dict(value)
+
+
+def coerce_perturbation_payload(value: PerturbationLike) -> Dict[str, Any]:
+    return coerce_perturbation(value).to_dict()
 
 
 def _as_optional_mapping(value: Any, field_name: str) -> Optional[Mapping[Any, Any]]:
@@ -321,3 +339,48 @@ def _coerce_metric_vector(value: Mapping[Any, Any], expected_keys: Tuple[str, ..
     if set(normalized) != set(expected_keys):
         raise ValueError("metric vector must contain keys: %s" % ", ".join(expected_keys))
     return {key: normalized[key] for key in expected_keys}
+
+
+def _coerce_trace_payload(value: Any) -> Dict[str, Any]:
+    if value is None:
+        return {}
+    if not isinstance(value, Mapping):
+        raise TypeError("trace must be a mapping")
+
+    normalized = {str(key): raw_value for key, raw_value in value.items()}
+    if not normalized:
+        return {}
+    if set(normalized) != set(TRACE_KEYS):
+        raise ValueError("trace must contain keys: %s" % ", ".join(TRACE_KEYS))
+
+    policy_version = str(normalized["policy_version"]).strip()
+    if not policy_version:
+        raise ValueError("trace.policy_version must be a non-empty string")
+    floor_triggered = normalized["floor_triggered"]
+    if not isinstance(floor_triggered, bool):
+        raise TypeError("trace.floor_triggered must be a boolean")
+
+    trace = {
+        "input_node_count": _coerce_non_negative_int(normalized["input_node_count"], "trace.input_node_count"),
+        "input_edge_count": _coerce_non_negative_int(normalized["input_edge_count"], "trace.input_edge_count"),
+        "output_node_count": _coerce_non_negative_int(normalized["output_node_count"], "trace.output_node_count"),
+        "output_edge_count": _coerce_non_negative_int(normalized["output_edge_count"], "trace.output_edge_count"),
+        "normalized_vector": _coerce_metric_vector(
+            _as_required_mapping(normalized["normalized_vector"], "trace.normalized_vector"),
+            NORMALIZED_METRIC_KEYS,
+        ),
+        "coherence_score": _coerce_unit_interval(normalized["coherence_score"], "trace.coherence_score"),
+        "spread": _coerce_unit_interval(normalized["spread"], "trace.spread"),
+        "floor_triggered": floor_triggered,
+        "policy_version": policy_version,
+    }
+    return trace
+
+
+def _coerce_non_negative_int(value: Any, field_name: str) -> int:
+    if isinstance(value, bool):
+        raise TypeError("%s must be an integer" % field_name)
+    numeric = int(value)
+    if numeric < 0:
+        raise ValueError("%s must be non-negative" % field_name)
+    return numeric

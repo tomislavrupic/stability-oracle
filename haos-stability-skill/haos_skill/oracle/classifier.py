@@ -17,6 +17,30 @@ class PolicyConfig:
     marginal_coherence_threshold: float = 0.50
     policy_version: str = POLICY_VERSION_V1
 
+    @classmethod
+    def strict(cls) -> "PolicyConfig":
+        return cls(
+            floor_threshold=0.40,
+            stable_coherence_threshold=0.82,
+            stable_spread_threshold=0.25,
+            marginal_coherence_threshold=0.60,
+            policy_version="v1_strict_floor_mean_band",
+        )
+
+    @classmethod
+    def balanced(cls) -> "PolicyConfig":
+        return cls()
+
+    @classmethod
+    def exploratory(cls) -> "PolicyConfig":
+        return cls(
+            floor_threshold=0.20,
+            stable_coherence_threshold=0.70,
+            stable_spread_threshold=0.45,
+            marginal_coherence_threshold=0.45,
+            policy_version="v1_exploratory_floor_mean_band",
+        )
+
     def __post_init__(self) -> None:
         for field_name in (
             "floor_threshold",

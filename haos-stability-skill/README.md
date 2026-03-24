@@ -10,6 +10,8 @@ Overview assets:
 - [Evaluation Layer Diagram](../Images/Stability%20Oracle%20Evaluation%20Layer%20Overview.png)
 - [Overview PDF](../Images/Stability_Oracle.pdf)
 - [Numbered Documentation Paper](../Images/01%20Stability%20Oracle%20Documentation%20Paper.pdf)
+- [Oracle Engine v2 And Routing Paper](../Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
+- [Oracle Paradigm Reference](../Images/The_Oracle_Paradigm.pdf)
 
 For the conceptual framing of the project, see [docs/WHAT_IS_STABILITY_ORACLE.md](./docs/WHAT_IS_STABILITY_ORACLE.md).
 
@@ -156,6 +158,46 @@ The default policy is `v1_floor_mean_band`:
   "policy_version": "v1_floor_mean_band",
   "summary": "Structure is stable with high retention and low deformation."
 }
+```
+
+## Oracle Engine v2
+
+Oracle Engine v2 adds a reusable local decision layer on top of the existing contracts:
+
+- transition evaluation: `engine.evaluate_transition(before, after)`
+- perturbation evaluation: `engine.evaluate(before, perturbation)`
+- batch scanning: `engine.scan(before, perturbations)`
+- deterministic trace payload: node and edge counts, normalized vector, coherence, spread, floor trigger, and policy version
+
+Build it directly with:
+
+```python
+from haos_skill.oracle.engine import build_default_engine
+
+engine = build_default_engine()
+```
+
+For bounded rule-based language, use:
+
+```python
+from haos_skill import explain_result
+```
+
+## Oracle Routing Layer
+
+The routing layer adds a deterministic selector for which oracle domain should evaluate a candidate next:
+
+- current implemented route: `LOGICAL`
+- future route label: `PHYSICAL`
+- future route label: `FOUNDATIONAL`
+- bounded stubs are returned for unimplemented routes instead of crashing
+
+Build it directly with:
+
+```python
+from haos_skill.routing.router import build_default_router
+
+router = build_default_router()
 ```
 
 ## Agent Integration

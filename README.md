@@ -22,7 +22,9 @@ The project is designed to make HAOS-IIP stability signals usable without entang
 - [Standalone Skill Package](./haos-stability-skill/)
 - [Concept Document](./haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
 - [Numbered Documentation Paper (PDF)](./Images/01%20Stability%20Oracle%20Documentation%20Paper.pdf)
+- [Oracle Engine v2 And Routing Paper (PDF)](./Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
 - [Overview PDF](./Images/Stability_Oracle.pdf)
+- [Oracle Paradigm Reference (PDF)](./Images/The_Oracle_Paradigm.pdf)
 - [GitHub Pages Source](./docs/)
 
 ## Current Architecture
@@ -63,10 +65,10 @@ The project is designed to make HAOS-IIP stability signals usable without entang
 
 ## Status
 
-The invariant language layer, metric interface, and first classification policy are now in place. The repository can already expose HAOS-style structural stability as an agent-callable skill while keeping the research core separate from the application layer.
+The invariant language layer, metric interface, classification policy, Oracle Engine v2, and deterministic routing layer are now in place. The repository can expose HAOS-style structural stability as an agent-callable skill while keeping the research core separate from the application layer.
 
 ## Next
 
-- complete the oracle engine path from perturbation to policy verdict
 - expand the public Pages surface with benchmark and integration notes
+- keep `PHYSICAL` and `FOUNDATIONAL` routing surfaces as bounded stubs until explicit implementations exist
 - continue growing the standalone package without modifying frozen research code
