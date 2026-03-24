@@ -1,0 +1,42 @@
+{
+  "plan_id": "fragile-destructive-early-step",
+  "nodes": [
+    {
+      "id": "ingest",
+      "step_type": "input",
+      "reversible": true,
+      "checkpoint": false,
+      "invariant_tags": ["source_audio", "project_id"],
+      "risk_weight": 0.2
+    },
+    {
+      "id": "destructive_trim",
+      "step_type": "destructive_edit",
+      "reversible": false,
+      "checkpoint": false,
+      "invariant_tags": ["trimmed_audio"],
+      "risk_weight": 0.95
+    },
+    {
+      "id": "auto_mix",
+      "step_type": "transform",
+      "reversible": false,
+      "checkpoint": false,
+      "invariant_tags": ["mixed_audio"],
+      "risk_weight": 0.7
+    },
+    {
+      "id": "publish",
+      "step_type": "output",
+      "reversible": false,
+      "checkpoint": true,
+      "invariant_tags": ["release_master"],
+      "risk_weight": 0.35
+    }
+  ],
+  "edges": [
+    { "source": "ingest", "target": "destructive_trim" },
+    { "source": "destructive_trim", "target": "auto_mix" },
+    { "source": "auto_mix", "target": "publish" }
+  ]
+}

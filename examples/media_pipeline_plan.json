@@ -1,0 +1,60 @@
+{
+  "plan_id": "media-pipeline-stable",
+  "nodes": [
+    {
+      "id": "ingest",
+      "step_type": "input",
+      "reversible": true,
+      "checkpoint": true,
+      "invariant_tags": ["source_media", "project_id"],
+      "risk_weight": 0.15
+    },
+    {
+      "id": "transcribe",
+      "step_type": "analysis",
+      "reversible": true,
+      "checkpoint": false,
+      "invariant_tags": ["source_media", "project_id", "transcript"],
+      "risk_weight": 0.2
+    },
+    {
+      "id": "rough_cut",
+      "step_type": "edit",
+      "reversible": true,
+      "checkpoint": true,
+      "invariant_tags": ["source_media", "project_id", "transcript", "timeline_v1"],
+      "risk_weight": 0.3
+    },
+    {
+      "id": "color_grade",
+      "step_type": "transform",
+      "reversible": true,
+      "checkpoint": false,
+      "invariant_tags": ["source_media", "project_id", "transcript", "timeline_v1", "grade_v1"],
+      "risk_weight": 0.25
+    },
+    {
+      "id": "review",
+      "step_type": "review",
+      "reversible": true,
+      "checkpoint": true,
+      "invariant_tags": ["source_media", "project_id", "transcript", "timeline_v1", "grade_v1", "approved_cut"],
+      "risk_weight": 0.15
+    },
+    {
+      "id": "publish",
+      "step_type": "output",
+      "reversible": false,
+      "checkpoint": true,
+      "invariant_tags": ["source_media", "project_id", "transcript", "timeline_v1", "grade_v1", "approved_cut", "release_master"],
+      "risk_weight": 0.1
+    }
+  ],
+  "edges": [
+    { "source": "ingest", "target": "transcribe" },
+    { "source": "transcribe", "target": "rough_cut" },
+    { "source": "rough_cut", "target": "color_grade" },
+    { "source": "color_grade", "target": "review" },
+    { "source": "review", "target": "publish" }
+  ]
+}

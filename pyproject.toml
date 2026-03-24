@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stability-oracle"
+version = "0.1.0"
+description = "Portable plan-stability scanner for directed workflow trajectories."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+stability-oracle-scan = "cli.scan_plan:main"
+haos-iip-skill = "haos_iip_skill.skill:main"
+
+[tool.setuptools.packages.find]
+include = ["oracle", "oracle.*", "cli", "cli.*", "haos_iip_skill", "haos_iip_skill.*"]
+
+[tool.setuptools.package-data]
+haos_iip_skill = ["schema.json"]
