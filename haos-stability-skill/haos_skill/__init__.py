@@ -1,6 +1,12 @@
 """Standalone HAOS structural stability skill."""
 
 from .cache import DeterministicHashCache, NullCache
+from .foundational import (
+    FoundationalCheck,
+    FoundationalDimension,
+    FoundationalResult,
+    FoundationalSignals,
+)
 from .metrics import (
     CausalDeformationMetric,
     GeometricIntegrityMetric,
@@ -47,6 +53,10 @@ __all__ = [
     "CausalDeformationMetric",
     "DEFAULT_TIMEOUT_SECONDS",
     "DeterministicHashCache",
+    "FoundationalCheck",
+    "FoundationalDimension",
+    "FoundationalResult",
+    "FoundationalSignals",
     "GeometricIntegrityMetric",
     "InputLimitError",
     "MetricRegistry",

@@ -94,6 +94,14 @@ python3 -m examples.agent_loop_demo
 
 It walks a tiny proposal loop where candidate graph edits are scored by the oracle policy, weak moves are rejected, and the accepted trajectory converges toward a more redundant corridor.
 
+Run the deterministic router demo:
+
+```bash
+python3 -m examples.router_demo
+```
+
+It shows one `LOGICAL` execution path plus bounded stub responses for `PHYSICAL`, `FOUNDATIONAL`, and `UNKNOWN`.
+
 ## Invariant Core
 
 The invariant oracle contract now lives in [haos_skill/state_spec.py](./haos_skill/state_spec.py):
@@ -199,6 +207,64 @@ from haos_skill.routing.router import build_default_router
 
 router = build_default_router()
 ```
+
+Example route decision:
+
+```python
+from haos_skill import RoutingContext, build_default_router
+
+router = build_default_router()
+decision = router.decide(
+    RoutingContext(requires_structural_stability=True)
+)
+print(decision.to_dict())
+```
+
+```json
+{
+  "selected_route": "LOGICAL",
+  "confidence": 1.0,
+  "rationale": "requires_structural_stability",
+  "policy_version": "routing_v1_explicit_priority"
+}
+```
+
+Example dispatch result:
+
+```python
+from haos_skill import Perturbation, RoutingContext, build_default_router
+
+router = build_default_router()
+result = router.dispatch(
+    RoutingContext(requires_structural_stability=True),
+    before={
+        "nodes": [1, 2, 3, 4],
+        "edges": [[1, 2], [2, 3], [3, 4]],
+        "timestamps": {"1": 0.0, "2": 1.0, "3": 2.0, "4": 3.0}
+    },
+    perturbation=Perturbation(cluster_split=True),
+)
+print(result.to_dict())
+```
+
+The dispatch payload includes the route decision and, for `LOGICAL`, the traced engine result.
+
+## Foundational Contract
+
+The repository now also defines the future FOUNDATIONAL language layer without implementing the engine itself.
+
+The contract lives in [haos_skill/foundational/contract.py](./haos_skill/foundational/contract.py) and defines:
+
+- `FoundationalCheck`: what a foundational route is allowed to inspect
+- `FoundationalSignals`: bounded signal bundle
+- `FoundationalResult`: typed future result contract
+
+The current foundational dimensions are:
+
+- `contradiction_risk`
+- `composability_violation`
+- `non_recoverable_identity_collapse`
+- `invalid_abstraction_crossing`
 
 ## Agent Integration
 
