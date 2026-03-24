@@ -1,0 +1,389 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  pdftitle={Stability Oracle Documentation Paper},
+  pdfauthor={OpenAI Codex},
+  pdfsubject={Structural Stability Evaluation Layer for HAOS-IIP}
+}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+\title{Stability Oracle\\Documentation Paper}
+\author{Structural Stability Evaluation Layer for HAOS-IIP}
+\date{March 24, 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Purpose}
+
+Stability Oracle is a minimal structural evaluation engine for HAOS-IIP-aligned systems.
+Its role is narrow by design:
+
+\begin{itemize}
+\item evaluate whether structure survives controlled perturbation
+\item expose deterministic stability signals
+\item provide a machine-readable decision surface for tools and agents
+\end{itemize}
+
+The oracle does not model physics, derive ontology, or make cosmological claims.
+It acts as an operational measurement layer over a frozen external HAOS telemetry surface.
+
+\section{System Framing}
+
+\subsection{What The Oracle Measures}
+
+The oracle evaluates structural survival across four bounded metrics:
+
+\begin{itemize}
+\item \texttt{structural\_retention}: how much organization persists after perturbation
+\item \texttt{temporal\_consistency}: whether ordering relations remain recoverable
+\item \texttt{causal\_deformation}: how strongly propagation geometry is distorted
+\item \texttt{geometric\_integrity}: whether local coherence collapses or stabilizes
+\end{itemize}
+
+These metrics are normalized to the interval \texttt{[0,1]}.
+The intent is to support synthetic graphs, interaction networks, symbolic state spaces, agent memory structures, and simulation outputs without coupling the oracle to one substrate.
+
+\subsection{What The Oracle Does Not Claim}
+
+The oracle does not claim:
+
+\begin{itemize}
+\item emergence of spacetime
+\item physical law derivation
+\item consciousness modeling
+\item universal ontology
+\item predictive cosmology
+\end{itemize}
+
+It is a measurement instrument, not a theory.
+Its labels such as \texttt{stable}, \texttt{marginal}, and \texttt{unstable} describe structural survivability only.
+
+\section{Architecture}
+
+The standalone repository is organized as a layered system:
+
+\begin{enumerate}
+\item agent layer
+\item tool interface layer
+\item skill logic layer
+\item adapter layer
+\item external HAOS dependency
+\end{enumerate}
+
+No scientific code lives in this repository.
+The project treats HAOS-IIP as an external dependency and communicates with it through a bounded CLI adapter.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{../../Images/Stability Oracle Evaluation Layer Overview.png}
+  \caption{Stability Oracle evaluation layer overview.}
+\end{figure}
+
+\section{State Language}
+
+\subsection{Invariant Core}
+
+The invariant contract is defined in \texttt{haos\_skill/state\_spec.py}.
+It contains four typed dataclasses:
+
+\begin{itemize}
+\item \texttt{State}
+\item \texttt{Perturbation}
+\item \texttt{StabilityMetrics}
+\item \texttt{OracleResult}
+\end{itemize}
+
+This layer is intentionally algorithm-free.
+It defines the language the oracle speaks.
+
+\subsection{State}
+
+\texttt{State} is a minimal structural representation with:
+
+\begin{itemize}
+\item node identifiers
+\item directed edges
+\item optional feature map
+\item optional timestamp map
+\end{itemize}
+
+The contract enforces:
+
+\begin{itemize}
+\item unique node identifiers
+\item edges that reference only known nodes
+\item optional feature and timestamp keys that reference only known nodes
+\end{itemize}
+
+\subsection{Perturbation}
+
+\texttt{Perturbation} describes bounded structural disturbance:
+
+\begin{itemize}
+\item node drop ratio
+\item edge drop ratio
+\item noise ratio
+\item cluster split flag
+\end{itemize}
+
+This is descriptive only.
+It does not imply any specific perturbation engine implementation.
+
+\subsection{Oracle Result}
+
+\texttt{OracleResult} now includes:
+
+\begin{itemize}
+\item classification
+\item metrics
+\item confidence
+\item coherence score
+\item raw metric vector
+\item normalized metric vector
+\item policy version
+\end{itemize}
+
+This preserves reproducibility across policy revisions.
+
+\section{Metric Interface}
+
+\subsection{Design Goal}
+
+Metrics are designed to be:
+
+\begin{itemize}
+\item deterministic
+\item side-effect free
+\item reproducible
+\item bounded to \texttt{[0,1]}
+\item defined only on \texttt{(State\_before, State\_after)}
+\end{itemize}
+
+\subsection{Protocol}
+
+The interface is defined in \texttt{haos\_skill/metrics/base.py}.
+
+\begin{verbatim}
+class StabilityMetric(ABC):
+    name: str
+    def compute(self, before: State, after: State) -> float:
+        ...
+\end{verbatim}
+
+The companion \texttt{MetricRegistry} holds pluggable metrics and computes them as a deterministic bundle.
+
+\subsection{Current Minimal Metrics}
+
+The first concrete metrics are deliberately small:
+
+\begin{itemize}
+\item \texttt{StructuralRetentionMetric}
+\item \texttt{TemporalConsistencyMetric}
+\item \texttt{CausalDeformationMetric}
+\item \texttt{GeometricIntegrityMetric}
+\end{itemize}
+
+They are meant to be composable, testable, and replaceable.
+They are not presented as final truth functions.
+
+\section{Classification Policy}
+
+\subsection{Policy Intent}
+
+Classification is implemented as a deterministic policy module in \texttt{haos\_skill/oracle/classifier.py}.
+It is not a learned model.
+It is a small, inspectable decision rule.
+
+\subsection{Normalization}
+
+The policy converts the raw metric bundle into a direct stability vector:
+
+\[
+\begin{array}{rcl}
+S_1 & = & \mbox{structural\_retention} \\
+S_2 & = & \mbox{temporal\_consistency} \\
+S_3 & = & 1 - \mbox{causal\_deformation} \\
+S_4 & = & \mbox{geometric\_integrity}
+\end{array}
+\]
+
+All normalized dimensions therefore share the same polarity:
+higher means more stable.
+
+\subsection{Decision Rule}
+
+Version \texttt{v1\_floor\_mean\_band} applies:
+
+\begin{itemize}
+\item a hard survivability floor at \texttt{0.30}
+\item an unweighted coherence score equal to the arithmetic mean of the normalized vector
+\item a spread score equal to \texttt{max(S) - min(S)}
+\end{itemize}
+
+Decision regions:
+
+\begin{itemize}
+\item \texttt{stable}: coherence \texttt{>= 0.75} and spread \texttt{<= 0.35}
+\item \texttt{marginal}: coherence \texttt{>= 0.50} and no floor violation
+\item \texttt{unstable}: every remaining case
+\end{itemize}
+
+\subsection{Confidence}
+
+The policy emits a continuous confidence value:
+
+\[
+\mbox{confidence} = \mbox{coherence} \times (1 - \mbox{spread})
+\]
+
+This gives agents both a discrete verdict and a bounded gradient.
+
+\section{Adapter And Tool Surface}
+
+\subsection{External Dependency Boundary}
+
+The adapter layer calls an external HAOS oracle CLI.
+By default it expects:
+
+\begin{verbatim}
+haos_iip.demo stability --json
+\end{verbatim}
+
+Input is passed either:
+
+\begin{itemize}
+\item by substituting a \texttt{\{state\_json\}} token
+\item by appending the value after \texttt{--state-json}
+\item or through standard input
+\end{itemize}
+
+\subsection{Skill Surface}
+
+The public callable interface exposes:
+
+\begin{itemize}
+\item \texttt{evaluate\_structure(state\_spec)}
+\item \texttt{scan\_structure(grid\_spec)}
+\end{itemize}
+
+The CLI exposes:
+
+\begin{verbatim}
+haos-skill evaluate state.json
+haos-skill scan grid.json
+\end{verbatim}
+
+Outputs are JSON only.
+
+\subsection{Agent Integration}
+
+The repository includes minimal integration patterns for:
+
+\begin{itemize}
+\item OpenClaw-style skill registration
+\item Hermes-style schema plus callable registration
+\end{itemize}
+
+\section{Safety And Reproducibility}
+
+The safety layer enforces:
+
+\begin{itemize}
+\item hard timeout guards
+\item serialized input size limits
+\item node, edge, and batch size bounds
+\item fail-closed protocol handling
+\item optional deterministic in-memory caching
+\end{itemize}
+
+The classifier additionally preserves reproducibility with an explicit policy version string.
+
+\section{Current Documentation Inventory}
+
+This paper consolidates the current documentation surface:
+
+\begin{tabular}{p{0.33\textwidth} p{0.57\textwidth}}
+\textbf{Document} & \textbf{Role} \\
+\hline
+\texttt{README.md} & Repository landing page, usage, architecture, and public entry points. \\
+\texttt{docs/WHAT\_IS\_STABILITY\_ORACLE.md} & Conceptual framing, scope, non-claims, and roadmap. \\
+\texttt{docs/01\_STABILITY\_ORACLE\_DOCUMENTATION\_PAPER.tex} & Numbered documentation source for this compiled paper. \\
+\texttt{Images/Stability Oracle Evaluation Layer Overview.png} & Visual architecture overview used on the public landing page. \\
+\texttt{Images/Stability\_Oracle.pdf} & Existing companion PDF asset. \\
+\end{tabular}
+
+\section{Verification Status}
+
+At the time of writing, the standalone repository includes automated tests for:
+
+\begin{itemize}
+\item state contract normalization
+\item metric interface behavior
+\item classification policy
+\item timeout handling
+\item deterministic cache behavior
+\item skill output shape
+\end{itemize}
+
+This confirms that the project currently has:
+
+\begin{itemize}
+\item a stable language layer
+\item a pluggable metric interface
+\item a reproducible classification policy
+\item a bounded agent-facing skill surface
+\end{itemize}
+
+\section{Roadmap}
+
+The current development sequence is:
+
+\begin{enumerate}
+\item language layer
+\item metric interface
+\item oracle engine
+\item public demo surface
+\item agent skill integration
+\item research extensions
+\end{enumerate}
+
+The next clean architectural step is the \texttt{OracleEngine}, which should:
+
+\begin{enumerate}
+\item run perturbation
+\item run the metric registry
+\item map the resulting metrics through the classifier policy
+\end{enumerate}
+
+\section{Conclusion}
+
+Stability Oracle advances through small operational steps.
+Its value does not depend on large claims.
+
+The system becomes useful by remaining:
+
+\begin{itemize}
+\item deterministic
+\item bounded
+\item testable
+\item composable
+\item explicit about what it does and does not claim
+\end{itemize}
+
+That is the foundation that allows the project to function as a practical bridge between frozen HAOS-IIP research artifacts and usable engineering interfaces.
+
+\end{document}

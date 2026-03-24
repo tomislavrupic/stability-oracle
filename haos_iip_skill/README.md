@@ -38,7 +38,7 @@ stability_map = scan_structure(
   "classification": "stable",
   "structural_retention": 1.0,
   "temporal_consistency": 1.0,
-  "causal_deformation": 0.0383,
+  "causal_deformation": 0.0566,
   "geometric_integrity": 1.0,
   "summary": "Structure is stable with clean propagation and retained invariants."
 }
@@ -81,7 +81,23 @@ Batch scan:
 ```bash
 haos-iip-skill scan --grid-json '{
   "cases": [
-    {"case_id": "stable", "state_spec": {"plan_id": "stable", "nodes": [], "edges": []}}
+    {
+      "case_id": "minimal",
+      "state_spec": {
+        "plan_id": "minimal",
+        "nodes": [
+          {
+            "id": "start",
+            "step_type": "input",
+            "reversible": true,
+            "checkpoint": true,
+            "invariant_tags": ["source"],
+            "risk_weight": 0.1
+          }
+        ],
+        "edges": []
+      }
+    }
   ]
 }' --json-only
 ```
@@ -128,7 +144,7 @@ Expected result shape:
   "classification": "stable",
   "structural_retention": 1.0,
   "temporal_consistency": 1.0,
-  "causal_deformation": 0.0383,
+  "causal_deformation": 0.0566,
   "geometric_integrity": 1.0,
   "summary": "Structure is stable with clean propagation and retained invariants."
 }
