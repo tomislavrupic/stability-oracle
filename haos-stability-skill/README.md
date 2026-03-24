@@ -82,6 +82,16 @@ report = evaluate_structure(state_spec.to_dict())
 stability_map = scan_structure({"cases": [{"case_id": "baseline", "state_spec": state_spec.to_dict()}]})
 ```
 
+## Micro Demo
+
+Run the deterministic agent-loop demo from the package root:
+
+```bash
+python3 -m examples.agent_loop_demo
+```
+
+It walks a tiny proposal loop where candidate graph edits are scored by the oracle policy, weak moves are rejected, and the accepted trajectory converges toward a more redundant corridor.
+
 ## Invariant Core
 
 The invariant oracle contract now lives in [haos_skill/state_spec.py](./haos_skill/state_spec.py):
