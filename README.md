@@ -33,6 +33,7 @@ These demos show that the oracle can classify structural instability in both sym
 - [Telemetry Layer And HAOS Parity Bridge Paper (PDF)](./Images/03%20Telemetry%20Layer%20And%20HAOS%20Parity%20Bridge%20Paper.pdf)
 - [LLM Reasoning Telemetry Demo Paper (PDF)](./Images/04%20LLM%20Reasoning%20Telemetry%20Demo%20Paper.pdf)
 - [Agent Trajectory Stability Demo Paper (PDF)](./Images/05%20Agent%20Trajectory%20Stability%20Demo%20Paper.pdf)
+- [Main Reference Paper (PDF)](./Images/06%20Stability%20Oracle%20Main%20Paper.pdf)
 - [LLM Reasoning Demo Freeze Marker](./stability_oracle_demo/DEMO_V1_FROZEN.md)
 - [Agent Trajectory Demo Freeze Marker](./stability_oracle_demo_agent/DEMO_V1_FROZEN.md)
 - [Overview PDF](./Images/Stability_Oracle.pdf)

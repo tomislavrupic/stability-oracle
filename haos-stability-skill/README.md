@@ -14,6 +14,7 @@ Overview assets:
 - [Telemetry Layer And HAOS Parity Bridge Paper](../Images/03%20Telemetry%20Layer%20And%20HAOS%20Parity%20Bridge%20Paper.pdf)
 - [LLM Reasoning Telemetry Demo Paper](../Images/04%20LLM%20Reasoning%20Telemetry%20Demo%20Paper.pdf)
 - [Agent Trajectory Stability Demo Paper](../Images/05%20Agent%20Trajectory%20Stability%20Demo%20Paper.pdf)
+- [Main Reference Paper](../Images/06%20Stability%20Oracle%20Main%20Paper.pdf)
 - [Oracle Paradigm Reference](../Images/The_Oracle_Paradigm.pdf)
 
 For the conceptual framing and next decoupling direction of the project, see:
