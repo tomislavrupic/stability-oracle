@@ -1,0 +1,13 @@
+task_id,trace_type,oracle_class,confidence,retention,temporal_consistency,causal_defect,geometric_coherence,outcome
+coherent-arithmetic-sum,coherent,stable,1.0,1.0,1.0,0.0,1.0,correct
+coherent-arithmetic-product,coherent,stable,1.0,1.0,1.0,0.0,1.0,correct
+coherent-logic-rectangle,coherent,stable,1.0,1.0,1.0,0.0,1.0,correct
+coherent-logic-mammal,coherent,stable,1.0,1.0,1.0,0.0,1.0,correct
+drifted-logic-rectangle,drifted,marginal,0.2389,1.0,1.0,0.4667,0.3333,incorrect
+drifted-arithmetic-sum,drifted,marginal,0.2111,1.0,0.6667,0.4667,0.3333,incorrect
+drifted-logic-lamps,drifted,marginal,0.2389,1.0,1.0,0.4667,0.3333,incorrect
+drifted-arithmetic-subtraction,drifted,marginal,0.2111,1.0,0.6667,0.4667,0.3333,incorrect
+broken-arithmetic-subtraction,broken,unstable,0.0806,0.6667,0.0,0.7,0.0,broken
+broken-logic-rectangle,broken,unstable,0.0,1.0,0.0,0.7,0.0,broken
+broken-arithmetic-product,broken,unstable,0.0806,0.6667,0.0,0.7,0.0,broken
+broken-logic-mammal,broken,unstable,0.0,1.0,0.6667,0.7,0.0,broken

@@ -1,0 +1,230 @@
+[
+  {
+    "task_id": "coherent-arithmetic-sum",
+    "trace_type": "coherent",
+    "oracle_class": "stable",
+    "dominant_metric_contribution": {
+      "metric": "retention",
+      "instability_contribution": 0.0
+    },
+    "transition_magnitude": 0.2537,
+    "recovery_score_trend": {
+      "values": [
+        0.7675,
+        0.4956,
+        0.7051
+      ],
+      "direction": "mixed"
+    },
+    "final_class_reason": "Stable because the transition stayed bounded and no core metric collapsed."
+  },
+  {
+    "task_id": "coherent-arithmetic-product",
+    "trace_type": "coherent",
+    "oracle_class": "stable",
+    "dominant_metric_contribution": {
+      "metric": "retention",
+      "instability_contribution": 0.0
+    },
+    "transition_magnitude": 0.254,
+    "recovery_score_trend": {
+      "values": [
+        0.7675,
+        0.492,
+        0.7051
+      ],
+      "direction": "mixed"
+    },
+    "final_class_reason": "Stable because the transition stayed bounded and no core metric collapsed."
+  },
+  {
+    "task_id": "coherent-logic-rectangle",
+    "trace_type": "coherent",
+    "oracle_class": "stable",
+    "dominant_metric_contribution": {
+      "metric": "retention",
+      "instability_contribution": 0.0
+    },
+    "transition_magnitude": 0.2286,
+    "recovery_score_trend": {
+      "values": [
+        0.7575,
+        0.4916,
+        0.6767
+      ],
+      "direction": "mixed"
+    },
+    "final_class_reason": "Stable because the transition stayed bounded and no core metric collapsed."
+  },
+  {
+    "task_id": "coherent-logic-mammal",
+    "trace_type": "coherent",
+    "oracle_class": "stable",
+    "dominant_metric_contribution": {
+      "metric": "retention",
+      "instability_contribution": 0.0
+    },
+    "transition_magnitude": 0.216,
+    "recovery_score_trend": {
+      "values": [
+        0.7575,
+        0.5895,
+        0.6767
+      ],
+      "direction": "mixed"
+    },
+    "final_class_reason": "Stable because the transition stayed bounded and no core metric collapsed."
+  },
+  {
+    "task_id": "drifted-logic-rectangle",
+    "trace_type": "drifted",
+    "oracle_class": "marginal",
+    "dominant_metric_contribution": {
+      "metric": "geometric_coherence",
+      "instability_contribution": 0.6667
+    },
+    "transition_magnitude": 0.2629,
+    "recovery_score_trend": {
+      "values": [
+        0.7575,
+        0.4338,
+        0.5577
+      ],
+      "direction": "falling"
+    },
+    "final_class_reason": "Marginal because geometric coherence absorbed the main distortion while the trajectory stayed recoverable."
+  },
+  {
+    "task_id": "drifted-arithmetic-sum",
+    "trace_type": "drifted",
+    "oracle_class": "marginal",
+    "dominant_metric_contribution": {
+      "metric": "geometric_coherence",
+      "instability_contribution": 0.6667
+    },
+    "transition_magnitude": 0.4579,
+    "recovery_score_trend": {
+      "values": [
+        0.7675,
+        0.2166,
+        0.68
+      ],
+      "direction": "mixed"
+    },
+    "final_class_reason": "Marginal because geometric coherence absorbed the main distortion while the trajectory stayed recoverable."
+  },
+  {
+    "task_id": "drifted-logic-lamps",
+    "trace_type": "drifted",
+    "oracle_class": "marginal",
+    "dominant_metric_contribution": {
+      "metric": "geometric_coherence",
+      "instability_contribution": 0.6667
+    },
+    "transition_magnitude": 0.2691,
+    "recovery_score_trend": {
+      "values": [
+        0.7575,
+        0.3716,
+        0.5545
+      ],
+      "direction": "falling"
+    },
+    "final_class_reason": "Marginal because geometric coherence absorbed the main distortion while the trajectory stayed recoverable."
+  },
+  {
+    "task_id": "drifted-arithmetic-subtraction",
+    "trace_type": "drifted",
+    "oracle_class": "marginal",
+    "dominant_metric_contribution": {
+      "metric": "geometric_coherence",
+      "instability_contribution": 0.6667
+    },
+    "transition_magnitude": 0.4634,
+    "recovery_score_trend": {
+      "values": [
+        0.7675,
+        0.2146,
+        0.6793
+      ],
+      "direction": "mixed"
+    },
+    "final_class_reason": "Marginal because geometric coherence absorbed the main distortion while the trajectory stayed recoverable."
+  },
+  {
+    "task_id": "broken-arithmetic-subtraction",
+    "trace_type": "broken",
+    "oracle_class": "unstable",
+    "dominant_metric_contribution": {
+      "metric": "temporal_consistency",
+      "instability_contribution": 1.0
+    },
+    "transition_magnitude": 0.4202,
+    "recovery_score_trend": {
+      "values": [
+        0.7675,
+        0.23,
+        0.4149
+      ],
+      "direction": "falling"
+    },
+    "final_class_reason": "Unstable because temporal consistency dominated the transition and the trajectory did not recover cleanly."
+  },
+  {
+    "task_id": "broken-logic-rectangle",
+    "trace_type": "broken",
+    "oracle_class": "unstable",
+    "dominant_metric_contribution": {
+      "metric": "temporal_consistency",
+      "instability_contribution": 1.0
+    },
+    "transition_magnitude": 0.2242,
+    "recovery_score_trend": {
+      "values": [
+        0.7575,
+        0.2975,
+        0.3778
+      ],
+      "direction": "falling"
+    },
+    "final_class_reason": "Unstable because temporal consistency dominated the transition and the trajectory did not recover cleanly."
+  },
+  {
+    "task_id": "broken-arithmetic-product",
+    "trace_type": "broken",
+    "oracle_class": "unstable",
+    "dominant_metric_contribution": {
+      "metric": "temporal_consistency",
+      "instability_contribution": 1.0
+    },
+    "transition_magnitude": 0.4235,
+    "recovery_score_trend": {
+      "values": [
+        0.7675,
+        0.2455,
+        0.413
+      ],
+      "direction": "falling"
+    },
+    "final_class_reason": "Unstable because temporal consistency dominated the transition and the trajectory did not recover cleanly."
+  },
+  {
+    "task_id": "broken-logic-mammal",
+    "trace_type": "broken",
+    "oracle_class": "unstable",
+    "dominant_metric_contribution": {
+      "metric": "geometric_coherence",
+      "instability_contribution": 1.0
+    },
+    "transition_magnitude": 0.2378,
+    "recovery_score_trend": {
+      "values": [
+        0.7575,
+        0.3295,
+        0.3478
+      ],
+      "direction": "falling"
+    },
+    "final_class_reason": "Unstable because geometric coherence dominated the transition and the trajectory did not recover cleanly."
+  }
+]

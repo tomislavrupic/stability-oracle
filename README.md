@@ -24,6 +24,8 @@ The project is designed to make HAOS-IIP stability signals usable without entang
 - [Numbered Documentation Paper (PDF)](./Images/01%20Stability%20Oracle%20Documentation%20Paper.pdf)
 - [Oracle Engine v2 And Routing Paper (PDF)](./Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
 - [Telemetry Layer And HAOS Parity Bridge Paper (PDF)](./Images/03%20Telemetry%20Layer%20And%20HAOS%20Parity%20Bridge%20Paper.pdf)
+- [LLM Reasoning Telemetry Demo Paper (PDF)](./Images/04%20LLM%20Reasoning%20Telemetry%20Demo%20Paper.pdf)
+- [LLM Reasoning Demo Freeze Marker](./stability_oracle_demo/DEMO_V1_FROZEN.md)
 - [Overview PDF](./Images/Stability_Oracle.pdf)
 - [Oracle Paradigm Reference (PDF)](./Images/The_Oracle_Paradigm.pdf)
 - [GitHub Pages Source](./docs/)

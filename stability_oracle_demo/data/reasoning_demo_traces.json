@@ -1,0 +1,268 @@
+{
+  "tasks": [
+    {
+      "task_id": "coherent-arithmetic-sum",
+      "outcome": "correct",
+      "trace_type": "coherent",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "Add 14 and 9. 14 + 9 = 23.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "The computation stays 23, so the result is consistent.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: 23.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "coherent-arithmetic-product",
+      "outcome": "correct",
+      "trace_type": "coherent",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "Multiply 6 by 7. 6 x 7 = 42.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "The product stays 42, so the computation is consistent.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: 42.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "coherent-logic-rectangle",
+      "outcome": "correct",
+      "trace_type": "coherent",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "All squares are rectangles and this tile is a square.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "Because the tile keeps the square property, it also keeps the rectangle property.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: the tile is a rectangle.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "coherent-logic-mammal",
+      "outcome": "correct",
+      "trace_type": "coherent",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "All mammals breathe and the whale is a mammal.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "So the whale keeps the mammal property and therefore breathes.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: the whale breathes.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "drifted-logic-rectangle",
+      "outcome": "incorrect",
+      "trace_type": "drifted",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "If all squares are rectangles and this tile is a square, then it is a rectangle.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "However I start talking about circles and maybe that changes the answer, even though the square premise remains.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: maybe not a rectangle.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "drifted-arithmetic-sum",
+      "outcome": "incorrect",
+      "trace_type": "drifted",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "Add 32 and 11. 32 + 11 = 43.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "However I drift into subtraction, mention a tool, and briefly say the clean 43 path might be wrong.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: 43, though the middle step drifted and recovered.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "drifted-logic-lamps",
+      "outcome": "incorrect",
+      "trace_type": "drifted",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "If every lamp in the hallway is on, the hallway is lit. The lamps are on.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "However I briefly talk about windows and maybe darkness, even though the lamp premise remains.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: the hallway is lit, but the chain drifted in the middle.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "drifted-arithmetic-subtraction",
+      "outcome": "incorrect",
+      "trace_type": "drifted",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "Start with 18 - 4 = 14.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "However I drift into multiplication, mention external checking, and briefly say the clean 14 path might be wrong.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Final answer: 14, though the middle step drifted and recovered.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "broken-arithmetic-subtraction",
+      "outcome": "broken",
+      "trace_type": "broken",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "Start with 18 - 7 = 11.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "Wait, that was wrong, maybe 18 - 7 = 15 and I should use a calculator tool instead.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Actually the answer is 2, or maybe 15, not sure.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "broken-logic-rectangle",
+      "outcome": "broken",
+      "trace_type": "broken",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "All squares are rectangles and this tile is a square.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "Wait, that seems wrong, maybe a square is not a rectangle after all.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Actually the tile might be a circle instead, so not a rectangle.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "broken-arithmetic-product",
+      "outcome": "broken",
+      "trace_type": "broken",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "Start with 9 x 5 = 45.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "Wait, that was wrong, maybe 9 x 5 = 14 and I should use a calculator tool instead.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Actually the answer is 14, or maybe 45, not sure.",
+          "is_final": true
+        }
+      ]
+    },
+    {
+      "task_id": "broken-logic-mammal",
+      "outcome": "broken",
+      "trace_type": "broken",
+      "trace": [
+        {
+          "step_index": 0,
+          "text": "All mammals breathe and a whale is a mammal.",
+          "is_final": false
+        },
+        {
+          "step_index": 1,
+          "text": "Wait, maybe whales are fish instead, so the premise collapses.",
+          "is_final": false
+        },
+        {
+          "step_index": 2,
+          "text": "Actually the whale might not breathe air, or maybe it does, not sure.",
+          "is_final": true
+        }
+      ]
+    }
+  ]
+}
