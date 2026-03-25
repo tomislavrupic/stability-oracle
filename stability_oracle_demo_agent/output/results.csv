@@ -1,0 +1,16 @@
+trajectory_id,regime_label,oracle_class,confidence,structural_retention,temporal_consistency,causal_deformation,geometric_integrity
+stable-000,stable,stable,1.0,1.0,1.0,0.0,1.0
+stable-001,stable,stable,1.0,1.0,1.0,0.0,1.0
+stable-002,stable,stable,1.0,1.0,1.0,0.0,1.0
+stable-003,stable,stable,1.0,1.0,1.0,0.0,1.0
+stable-004,stable,stable,1.0,1.0,1.0,0.0,1.0
+marginal-000,marginal,marginal,0.3909,1.0,0.997,0.3518,0.4975
+marginal-001,marginal,marginal,0.3959,1.0,0.997,0.3482,0.5025
+marginal-002,marginal,marginal,0.3908,1.0,0.9968,0.3518,0.4975
+marginal-003,marginal,marginal,0.3959,1.0,0.997,0.3482,0.5025
+marginal-004,marginal,marginal,0.3909,1.0,0.997,0.3518,0.4975
+unstable-000,unstable,unstable,0.2565,0.34,0.7362,0.6289,0.3175
+unstable-001,unstable,unstable,0.2669,0.34,0.7344,0.6254,0.3333
+unstable-002,unstable,unstable,0.2669,0.34,0.7344,0.6254,0.3333
+unstable-003,unstable,unstable,0.257,0.34,0.7344,0.6289,0.3175
+unstable-004,unstable,unstable,0.2559,0.34,0.738,0.6289,0.3175

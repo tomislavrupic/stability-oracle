@@ -19,12 +19,15 @@ def telemetry_to_state_transition(seq: TelemetrySequence) -> tuple[dict[str, Any
     """
 
     validate_sequence(seq)
-    if len(seq.frames) != 2:
-        raise TelemetryBridgeError("telemetry bridge requires exactly two frames")
-
     adapter_kind = seq.metadata.get("adapter")
-    if adapter_kind != "haos_state_pair_v1":
-        raise TelemetryBridgeError("telemetry bridge only supports haos_state_pair_v1 sequences")
+    if adapter_kind == "haos_state_pair_v1":
+        if len(seq.frames) != 2:
+            raise TelemetryBridgeError("telemetry bridge requires exactly two frames for haos_state_pair_v1")
+    elif adapter_kind == "agent_trajectory_v1":
+        if len(seq.frames) < 2:
+            raise TelemetryBridgeError("telemetry bridge requires at least two frames for agent_trajectory_v1")
+    else:
+        raise TelemetryBridgeError("telemetry bridge only supports haos_state_pair_v1 and agent_trajectory_v1 sequences")
 
     bridge_payload = seq.metadata.get("bridge_state_transition")
     if not isinstance(bridge_payload, Mapping):

@@ -13,6 +13,7 @@ Overview assets:
 - [Oracle Engine v2 And Routing Paper](../Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
 - [Telemetry Layer And HAOS Parity Bridge Paper](../Images/03%20Telemetry%20Layer%20And%20HAOS%20Parity%20Bridge%20Paper.pdf)
 - [LLM Reasoning Telemetry Demo Paper](../Images/04%20LLM%20Reasoning%20Telemetry%20Demo%20Paper.pdf)
+- [Agent Trajectory Stability Demo Paper](../Images/05%20Agent%20Trajectory%20Stability%20Demo%20Paper.pdf)
 - [Oracle Paradigm Reference](../Images/The_Oracle_Paradigm.pdf)
 
 For the conceptual framing and next decoupling direction of the project, see:
@@ -22,6 +23,8 @@ For the conceptual framing and next decoupling direction of the project, see:
 - [docs/METRIC_PLUGIN_CONTRACT.md](./docs/METRIC_PLUGIN_CONTRACT.md)
 - [stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md](../stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
 - [stability_oracle_demo/DEMO_V1_FROZEN.md](../stability_oracle_demo/DEMO_V1_FROZEN.md)
+- [stability_oracle_demo_agent/docs/DEMO_DOMAIN_AGENT_TRAJECTORY.md](../stability_oracle_demo_agent/docs/DEMO_DOMAIN_AGENT_TRAJECTORY.md)
+- [stability_oracle_demo_agent/DEMO_V1_FROZEN.md](../stability_oracle_demo_agent/DEMO_V1_FROZEN.md)
 
 ## Architecture
 

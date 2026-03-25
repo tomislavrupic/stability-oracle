@@ -12,7 +12,7 @@ The project is designed to make HAOS-IIP stability signals usable without entang
 
 Current anchor:
 
-This demo shows that the oracle can detect structural reasoning drift using only trajectory geometry.
+These demos show that the oracle can classify structural instability in both symbolic reasoning traces and continuous motion trajectories using the same core engine.
 
 ## What This Repo Contains
 
@@ -32,14 +32,20 @@ This demo shows that the oracle can detect structural reasoning drift using only
 - [Oracle Engine v2 And Routing Paper (PDF)](./Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
 - [Telemetry Layer And HAOS Parity Bridge Paper (PDF)](./Images/03%20Telemetry%20Layer%20And%20HAOS%20Parity%20Bridge%20Paper.pdf)
 - [LLM Reasoning Telemetry Demo Paper (PDF)](./Images/04%20LLM%20Reasoning%20Telemetry%20Demo%20Paper.pdf)
+- [Agent Trajectory Stability Demo Paper (PDF)](./Images/05%20Agent%20Trajectory%20Stability%20Demo%20Paper.pdf)
 - [LLM Reasoning Demo Freeze Marker](./stability_oracle_demo/DEMO_V1_FROZEN.md)
+- [Agent Trajectory Demo Freeze Marker](./stability_oracle_demo_agent/DEMO_V1_FROZEN.md)
 - [Overview PDF](./Images/Stability_Oracle.pdf)
 - [Oracle Paradigm Reference (PDF)](./Images/The_Oracle_Paradigm.pdf)
 - [GitHub Pages Source](./docs/)
 
-## Current Demo
+## Public Demos
 
-The current public proof surface is the deterministic LLM reasoning telemetry demo in [`stability_oracle_demo/`](./stability_oracle_demo/).
+The repository now exposes two bounded public proof surfaces.
+
+### 1. LLM Reasoning Telemetry
+
+The first demo lives in [`stability_oracle_demo/`](./stability_oracle_demo/).
 
 - dataset: 12 traces
 - telemetry width: 8 dimensions
@@ -55,6 +61,25 @@ Open the main demo artifacts:
 - [Demo Note](./stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
 - [Results CSV](./stability_oracle_demo/output/results.csv)
 - [Trace Explanations JSON](./stability_oracle_demo/output/trace_explanations.json)
+
+### 2. Continuous Agent Trajectory Stability
+
+The second demo lives in [`stability_oracle_demo_agent/`](./stability_oracle_demo_agent/).
+
+- dataset: 15 trajectories
+- telemetry width: 8 dimensions
+- expected bands: stable -> stable, marginal -> marginal, unstable -> unstable
+- deterministic seeded simulation
+- freeze marker: [`DEMO_V1_FROZEN.md`](./stability_oracle_demo_agent/DEMO_V1_FROZEN.md)
+
+![Agent Trajectory Demo Plot](./stability_oracle_demo_agent/output/trajectory_plot.png)
+
+Open the main demo artifacts:
+
+- [Demo Paper (PDF)](./Images/05%20Agent%20Trajectory%20Stability%20Demo%20Paper.pdf)
+- [Demo Note](./stability_oracle_demo_agent/docs/DEMO_DOMAIN_AGENT_TRAJECTORY.md)
+- [Dataset JSON](./stability_oracle_demo_agent/data/agent_traces.json)
+- [Results CSV](./stability_oracle_demo_agent/output/results.csv)
 
 ## Current Architecture
 

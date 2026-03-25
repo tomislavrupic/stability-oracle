@@ -23,7 +23,7 @@ Given a state and a perturbation, determine whether meaningful structure survive
 
 Current anchor:
 
-This demo shows that the oracle can detect structural reasoning drift using only trajectory geometry.
+These demos show that the oracle can classify structural instability in both symbolic reasoning traces and continuous motion trajectories using the same core engine.
 
 ## Why This Exists
 
@@ -70,17 +70,20 @@ with a continuous confidence signal for downstream planning loops.
 4. [Oracle Engine v2 And Routing Paper (PDF)](./assets/02-oracle-engine-v2-and-deterministic-routing-paper.pdf)
 5. [Telemetry Layer And HAOS Parity Bridge Paper (PDF)](./assets/03-telemetry-layer-and-haos-parity-bridge-paper.pdf)
 6. [LLM Reasoning Telemetry Demo Paper (PDF)](./assets/04-llm-reasoning-telemetry-demo-paper.pdf)
-7. [Oracle Paradigm Reference (PDF)](./assets/the-oracle-paradigm.pdf)
-8. [Concept Document](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
-9. [Architecture V2 Spec](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/ARCHITECTURE_V2.md)
-10. [Metric Plugin Contract](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/METRIC_PLUGIN_CONTRACT.md)
-11. [LLM Reasoning Demo Domain](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
-12. [LLM Reasoning Demo Freeze Marker](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/DEMO_V1_FROZEN.md)
-13. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
+7. [Agent Trajectory Stability Demo Paper (PDF)](./assets/05-agent-trajectory-stability-demo-paper.pdf)
+8. [Oracle Paradigm Reference (PDF)](./assets/the-oracle-paradigm.pdf)
+9. [Concept Document](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
+10. [Architecture V2 Spec](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/ARCHITECTURE_V2.md)
+11. [Metric Plugin Contract](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/METRIC_PLUGIN_CONTRACT.md)
+12. [LLM Reasoning Demo Domain](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
+13. [LLM Reasoning Demo Freeze Marker](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/DEMO_V1_FROZEN.md)
+14. [Agent Trajectory Demo Domain](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo_agent/docs/DEMO_DOMAIN_AGENT_TRAJECTORY.md)
+15. [Agent Trajectory Demo Freeze Marker](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo_agent/DEMO_V1_FROZEN.md)
+16. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
 
-## Current Demo
+## Public Demos
 
-The current public demo is the deterministic LLM reasoning telemetry run.
+### 1. LLM Reasoning Telemetry
 
 - 12 traces total
 - 8-dimensional fixed telemetry
@@ -98,6 +101,24 @@ Demo artifacts:
 4. [Dataset JSON](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/data/reasoning_demo_traces.json)
 5. [Results CSV](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/output/results.csv)
 6. [Trace Explanations JSON](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/output/trace_explanations.json)
+
+### 2. Continuous Agent Trajectory Stability
+
+- 15 trajectories total
+- 8-dimensional fixed telemetry
+- stable -> stable
+- marginal -> marginal
+- unstable -> unstable
+
+![Agent Trajectory Demo Plot](./assets/agent-trajectory-demo-plot.png)
+
+Demo artifacts:
+
+1. [Demo Paper (PDF)](./assets/05-agent-trajectory-stability-demo-paper.pdf)
+2. [Demo Note](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo_agent/docs/DEMO_DOMAIN_AGENT_TRAJECTORY.md)
+3. [Freeze Marker](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo_agent/DEMO_V1_FROZEN.md)
+4. [Dataset JSON](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo_agent/data/agent_traces.json)
+5. [Results CSV](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo_agent/output/results.csv)
 
 ## Current Contract
 
