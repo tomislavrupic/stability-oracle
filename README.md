@@ -10,6 +10,10 @@ Given a state and a perturbation, does meaningful structure remain recoverably c
 
 The project is designed to make HAOS-IIP stability signals usable without entangling the research core with the application layer. The standalone skill layer treats HAOS-IIP as an external dependency and exposes a fast, deterministic interface for agents, demos, and downstream tooling.
 
+Current anchor:
+
+This demo shows that the oracle can detect structural reasoning drift using only trajectory geometry.
+
 ## What This Repo Contains
 
 - frozen research-facing oracle surfaces already present in the repository
@@ -20,6 +24,9 @@ The project is designed to make HAOS-IIP stability signals usable without entang
 ## Quick Links
 
 - [Standalone Skill Package](./haos-stability-skill/)
+- [Current Demo Dataset](./stability_oracle_demo/data/reasoning_demo_traces.json)
+- [Current Demo Results](./stability_oracle_demo/output/results.csv)
+- [Current Demo Explanations](./stability_oracle_demo/output/trace_explanations.json)
 - [Concept Document](./haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
 - [Numbered Documentation Paper (PDF)](./Images/01%20Stability%20Oracle%20Documentation%20Paper.pdf)
 - [Oracle Engine v2 And Routing Paper (PDF)](./Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
@@ -29,6 +36,25 @@ The project is designed to make HAOS-IIP stability signals usable without entang
 - [Overview PDF](./Images/Stability_Oracle.pdf)
 - [Oracle Paradigm Reference (PDF)](./Images/The_Oracle_Paradigm.pdf)
 - [GitHub Pages Source](./docs/)
+
+## Current Demo
+
+The current public proof surface is the deterministic LLM reasoning telemetry demo in [`stability_oracle_demo/`](./stability_oracle_demo/).
+
+- dataset: 12 traces
+- telemetry width: 8 dimensions
+- expected bands: coherent -> stable, drifted -> marginal, broken -> unstable
+- interpretability artifact: `trace_explanations.json`
+- freeze marker: [`DEMO_V1_FROZEN.md`](./stability_oracle_demo/DEMO_V1_FROZEN.md)
+
+![LLM Reasoning Demo Metrics](./stability_oracle_demo/output/metrics_plot.png)
+
+Open the main demo artifacts:
+
+- [Demo Paper (PDF)](./Images/04%20LLM%20Reasoning%20Telemetry%20Demo%20Paper.pdf)
+- [Demo Note](./stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
+- [Results CSV](./stability_oracle_demo/output/results.csv)
+- [Trace Explanations JSON](./stability_oracle_demo/output/trace_explanations.json)
 
 ## Current Architecture
 

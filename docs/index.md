@@ -21,6 +21,10 @@ It performs one bounded task:
 
 Given a state and a perturbation, determine whether meaningful structure survives.
 
+Current anchor:
+
+This demo shows that the oracle can detect structural reasoning drift using only trajectory geometry.
+
 ## Why This Exists
 
 HAOS-IIP established that certain interaction regimes produce recoverable coherence under interaction. Stability Oracle turns that insight into an operational surface that can be used in fast loops, public demos, and agent runtimes.
@@ -73,6 +77,27 @@ with a continuous confidence signal for downstream planning loops.
 11. [LLM Reasoning Demo Domain](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
 12. [LLM Reasoning Demo Freeze Marker](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/DEMO_V1_FROZEN.md)
 13. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
+
+## Current Demo
+
+The current public demo is the deterministic LLM reasoning telemetry run.
+
+- 12 traces total
+- 8-dimensional fixed telemetry
+- coherent -> stable
+- drifted -> marginal
+- broken -> unstable
+
+![LLM Reasoning Demo Metrics](./assets/llm-reasoning-demo-metrics-plot.png)
+
+Demo artifacts:
+
+1. [Demo Paper (PDF)](./assets/04-llm-reasoning-telemetry-demo-paper.pdf)
+2. [Demo Note](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/docs/DEMO_DOMAIN_LLM_REASONING.md)
+3. [Freeze Marker](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/DEMO_V1_FROZEN.md)
+4. [Dataset JSON](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/data/reasoning_demo_traces.json)
+5. [Results CSV](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/output/results.csv)
+6. [Trace Explanations JSON](https://github.com/tomislavrupic/stability-oracle/blob/main/stability_oracle_demo/output/trace_explanations.json)
 
 ## Current Contract
 
