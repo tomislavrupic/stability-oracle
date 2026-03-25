@@ -64,9 +64,13 @@ with a continuous confidence signal for downstream planning loops.
 2. [Overview Paper (PDF)](./assets/stability-oracle-overview.pdf)
 3. [Numbered Documentation Paper (PDF)](./assets/01-stability-oracle-documentation-paper.pdf)
 4. [Oracle Engine v2 And Routing Paper (PDF)](./assets/02-oracle-engine-v2-and-deterministic-routing-paper.pdf)
-5. [Oracle Paradigm Reference (PDF)](./assets/the-oracle-paradigm.pdf)
-6. [Concept Document](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
-7. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
+5. [Telemetry Layer And HAOS Parity Bridge Paper (PDF)](./assets/03-telemetry-layer-and-haos-parity-bridge-paper.pdf)
+6. [Oracle Paradigm Reference (PDF)](./assets/the-oracle-paradigm.pdf)
+7. [Concept Document](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/WHAT_IS_STABILITY_ORACLE.md)
+8. [Architecture V2 Spec](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/ARCHITECTURE_V2.md)
+9. [Metric Plugin Contract](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/METRIC_PLUGIN_CONTRACT.md)
+10. [LLM Reasoning Demo Domain](https://github.com/tomislavrupic/stability-oracle/blob/main/haos-stability-skill/docs/DEMO_DOMAIN_LLM_REASONING.md)
+11. [Standalone Skill Package](https://github.com/tomislavrupic/stability-oracle/tree/main/haos-stability-skill)
 
 ## Current Contract
 

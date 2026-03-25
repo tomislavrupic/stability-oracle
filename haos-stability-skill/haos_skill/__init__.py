@@ -48,6 +48,21 @@ from .safety import (
     SkillError,
     SkillTimeoutError,
 )
+from .telemetry import (
+    GeometryEncoderConfig,
+    HaosTelemetryAdapter,
+    HaosTelemetryAdapterConfig,
+    InvalidTelemetry,
+    StateGeometryEncoder,
+    TelemetryBridgeError,
+    TelemetryFrame,
+    TelemetrySequence,
+    TemporalNormalizer,
+    TemporalNormalizerConfig,
+    telemetry_to_state_transition,
+    validate_frame,
+    validate_sequence,
+)
 
 __all__ = [
     "CausalDeformationMetric",
@@ -58,7 +73,11 @@ __all__ = [
     "FoundationalResult",
     "FoundationalSignals",
     "GeometricIntegrityMetric",
+    "GeometryEncoderConfig",
+    "HaosTelemetryAdapter",
+    "HaosTelemetryAdapterConfig",
     "InputLimitError",
+    "InvalidTelemetry",
     "MetricRegistry",
     "NullCache",
     "OracleRoute",
@@ -87,6 +106,11 @@ __all__ = [
     "State",
     "StructuralRetentionMetric",
     "TemporalConsistencyMetric",
+    "TelemetryBridgeError",
+    "TelemetryFrame",
+    "TelemetrySequence",
+    "TemporalNormalizer",
+    "TemporalNormalizerConfig",
     "build_default_engine",
     "build_default_metric_registry",
     "build_default_router",
@@ -95,4 +119,7 @@ __all__ = [
     "load_schema",
     "route_candidate",
     "scan_structure",
+    "telemetry_to_state_transition",
+    "validate_frame",
+    "validate_sequence",
 ]

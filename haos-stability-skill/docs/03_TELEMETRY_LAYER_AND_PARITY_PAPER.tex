@@ -1,0 +1,342 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  pdftitle={Telemetry Layer and HAOS Parity Bridge},
+  pdfauthor={OpenAI Codex},
+  pdfsubject={Stability Oracle telemetry architecture update}
+}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+\title{Telemetry Layer And HAOS Parity Bridge\\Project Paper}
+\author{Stability Oracle Architectural Update}
+\date{March 25, 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Purpose}
+
+This paper documents the next safe architectural step in Stability Oracle:
+
+\begin{itemize}
+\item a parallel telemetry ingestion layer
+\item a deterministic HAOS adapter
+\item a deterministic temporal normalization surface
+\item a geometry encoder v0
+\item a narrow bridge back into the current logical engine
+\item a golden parity test against the existing logical classification path
+\end{itemize}
+
+This is not a rewrite of the current oracle.
+It is an additive path that preserves the present logical kernel while preparing a future domain-agnostic telemetry surface.
+
+\section{Architectural Stance}
+
+The project now distinguishes between two layers of concern.
+
+\subsection{Current Stable Core}
+
+The current stable logical kernel remains:
+
+\begin{itemize}
+\item \texttt{State}
+\item \texttt{Perturbation}
+\item metric registry
+\item classifier policy
+\item router
+\item \texttt{OracleEngine}
+\end{itemize}
+
+This remains the execution kernel for structural stability evaluation.
+
+\subsection{New Parallel Telemetry Layer}
+
+The new telemetry path sits beside the current core:
+
+\begin{itemize}
+\item \texttt{TelemetryFrame}
+\item \texttt{TelemetrySequence}
+\item HAOS telemetry adapter
+\item temporal normalizer
+\item geometry encoder v0
+\item telemetry bridge
+\end{itemize}
+
+This layer is designed to ingest domain-specific records without changing the semantics of the current logical engine.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{../../Images/Stability Oracle Evaluation Layer Overview 2.png}
+  \caption{Updated public overview for the Stability Oracle evaluation stack.}
+\end{figure}
+
+\section{Core Principle}
+
+The telemetry layer follows one rule:
+
+\begin{quote}
+The engine does not know what a system means. It only sees the geometry of change.
+\end{quote}
+
+This means:
+
+\begin{itemize}
+\item no domain-specific semantics in the telemetry core
+\item no interpretation of feature labels inside the geometry or metric layers
+\item no learned or adaptive behavior in v0
+\end{itemize}
+
+\section{Telemetry Contracts}
+
+\subsection{TelemetryFrame}
+
+\texttt{TelemetryFrame} is the minimal domain-agnostic telemetry atom.
+It contains:
+
+\begin{itemize}
+\item a finite timestamp
+\item an entity identifier
+\item a finite numeric state vector
+\item JSON-friendly metadata
+\end{itemize}
+
+\subsection{TelemetrySequence}
+
+\texttt{TelemetrySequence} is the ordered assessment unit.
+Its contract enforces:
+
+\begin{itemize}
+\item nondecreasing timestamps
+\item a consistent entity identifier
+\item fixed feature width across all frames in the sequence
+\item finite numeric state vectors
+\end{itemize}
+
+This distinction matters:
+raw upstream sources may have arbitrary dimensionality across domains, but once a sequence is normalized for assessment, the emitted stream must be fixed-width.
+
+\section{HAOS Adapter}
+
+\subsection{Role}
+
+The HAOS telemetry adapter exists to prove that a parallel telemetry path can be built without changing the logical oracle semantics.
+
+\subsection{v0 Output Shape}
+
+For a state pair:
+
+\begin{itemize}
+\item frame 0 represents the before-state
+\item frame 1 represents the after-state
+\end{itemize}
+
+The adapter emits only structural features already allowed by the current logical path, such as:
+
+\begin{itemize}
+\item node count
+\item edge count
+\item feature count
+\item timestamp count
+\item connected-component count
+\item edge density
+\item mean degree
+\item max degree
+\end{itemize}
+
+Optionally, it can append deterministic before/after delta features.
+
+\subsection{Non-Goals}
+
+The adapter does not interpret meaning.
+It does not say what a node, edge, timestamp, or feature \emph{means}.
+It only converts already-permitted structure into numeric telemetry.
+
+\section{Temporal Normalization}
+
+The temporal normalizer is intentionally minimal in v0.
+Its job is to:
+
+\begin{itemize}
+\item validate telemetry
+\item optionally scale vectors per sequence
+\item optionally compute first differences
+\item optionally mark simple time gaps in metadata
+\end{itemize}
+
+It does not:
+
+\begin{itemize}
+\item learn interpolation behavior
+\item resample with invented values
+\item adapt online
+\item introduce stochastic preprocessing
+\end{itemize}
+
+Default behavior is close to a no-op apart from deterministic validation and scaling.
+
+\section{Geometry Encoder v0}
+
+The geometry encoder is also intentionally small.
+Its permitted operations are:
+
+\begin{itemize}
+\item deterministic scaling
+\item first derivatives
+\item second derivatives if explicitly enabled
+\end{itemize}
+
+It does not attempt:
+
+\begin{itemize}
+\item learned embeddings
+\item adaptive manifold projections
+\item ontology-sensitive geometry
+\end{itemize}
+
+Its role is only to make change geometry more explicit while remaining deterministic and inspectable.
+
+\section{The Bridge}
+
+The bridge is the key safety constraint.
+
+Instead of forcing the current logical engine to consume arbitrary telemetry directly, the project adds a narrow bridge:
+
+\begin{verbatim}
+telemetry_to_state_transition(...)
+\end{verbatim}
+
+This bridge only accepts HAOS-shaped telemetry sequences produced by the adapter and only when they contain explicit bridge metadata.
+If that metadata is missing or the shape is unsafe, the bridge fails closed.
+
+That decision preserves the existing logical engine as the execution kernel.
+
+\section{Golden Parity Test}
+
+The most important new test is the parity bridge test.
+
+It compares two paths:
+
+\subsection{Direct Logical Path}
+
+\begin{verbatim}
+before + after -> OracleEngine.evaluate_transition(...)
+\end{verbatim}
+
+\subsection{Telemetry Path}
+
+\begin{verbatim}
+before + after
+-> HaosTelemetryAdapter
+-> TemporalNormalizer
+-> StateGeometryEncoder
+-> telemetry_to_state_transition(...)
+-> OracleEngine.evaluate_transition(...)
+\end{verbatim}
+
+Current requirement:
+
+\begin{itemize}
+\item classification band parity on canonical fixtures
+\item \texttt{stable == stable}
+\item \texttt{marginal == marginal}
+\item \texttt{unstable == unstable}
+\end{itemize}
+
+Exact metric equality is not required at this stage.
+Band parity is the safe migration gate.
+
+\section{Why This Matters}
+
+This design prevents a common architectural mistake:
+rewriting a working logical oracle into a generic telemetry engine in one jump.
+
+Instead, the project now follows a survivable path:
+
+\begin{enumerate}
+\item preserve the current logical core
+\item build a parallel telemetry ingestion layer
+\item prove parity on HAOS-shaped inputs
+\item only then widen the system to non-HAOS domains
+\end{enumerate}
+
+\section{First Non-HAOS Demo Direction}
+
+The intended first non-HAOS demo after parity is LLM reasoning trace stability.
+
+This domain is suitable because it is:
+
+\begin{itemize}
+\item sequential
+\item easy to serialize
+\item visible to agents and users
+\item free of physics claims
+\item useful for monitoring tool-use and chain quality
+\end{itemize}
+
+But this paper records a strict sequencing rule:
+no non-HAOS generalization should proceed until HAOS parity is established and retained.
+
+\section{What This Update Does Not Do}
+
+This update does not:
+
+\begin{itemize}
+\item rewrite the current oracle into a universal time-series engine
+\item change metric semantics
+\item introduce learned encoders
+\item add streaming behavior
+\item calibrate recovery as a probability
+\item widen domain support beyond a safe parallel contract
+\end{itemize}
+
+The term used for downstream scoring remains \texttt{recovery\_score}, not probability language.
+
+\section{Operational Summary}
+
+The repository now supports a deterministic telemetry path such as:
+
+\begin{verbatim}
+seq = HaosTelemetryAdapter().from_state_pair(before, after)
+seq = TemporalNormalizer().normalize(seq)
+seq = StateGeometryEncoder().encode(seq)
+before_state, after_state = telemetry_to_state_transition(seq)
+\end{verbatim}
+
+and then:
+
+\begin{verbatim}
+result = build_default_engine().evaluate_transition(before_state, after_state)
+\end{verbatim}
+
+This makes telemetry ingestion parallel to the existing logical path rather than competitive with it.
+
+\section{Conclusion}
+
+The Stability Oracle project now has:
+
+\begin{itemize}
+\item a deterministic telemetry contract
+\item a deterministic HAOS adapter
+\item a minimal temporal normalizer
+\item a minimal geometry encoder
+\item a narrow telemetry bridge
+\item a golden parity test against the existing logical engine
+\end{itemize}
+
+This is the right level of change.
+It widens the system carefully while preserving the thing that already works.
+
+\end{document}

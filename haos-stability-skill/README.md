@@ -11,9 +11,15 @@ Overview assets:
 - [Overview PDF](../Images/Stability_Oracle.pdf)
 - [Numbered Documentation Paper](../Images/01%20Stability%20Oracle%20Documentation%20Paper.pdf)
 - [Oracle Engine v2 And Routing Paper](../Images/02%20Oracle%20Engine%20v2%20and%20Deterministic%20Routing%20Paper.pdf)
+- [Telemetry Layer And HAOS Parity Bridge Paper](../Images/03%20Telemetry%20Layer%20And%20HAOS%20Parity%20Bridge%20Paper.pdf)
 - [Oracle Paradigm Reference](../Images/The_Oracle_Paradigm.pdf)
 
-For the conceptual framing of the project, see [docs/WHAT_IS_STABILITY_ORACLE.md](./docs/WHAT_IS_STABILITY_ORACLE.md).
+For the conceptual framing and next decoupling direction of the project, see:
+
+- [docs/WHAT_IS_STABILITY_ORACLE.md](./docs/WHAT_IS_STABILITY_ORACLE.md)
+- [docs/ARCHITECTURE_V2.md](./docs/ARCHITECTURE_V2.md)
+- [docs/METRIC_PLUGIN_CONTRACT.md](./docs/METRIC_PLUGIN_CONTRACT.md)
+- [docs/DEMO_DOMAIN_LLM_REASONING.md](./docs/DEMO_DOMAIN_LLM_REASONING.md)
 
 ## Architecture
 
@@ -190,6 +196,28 @@ For bounded rule-based language, use:
 ```python
 from haos_skill import explain_result
 ```
+
+## Telemetry Layer v0
+
+The telemetry layer is a new parallel ingestion path, not a rewrite of the current logical core.
+
+It adds:
+
+- `TelemetryFrame`
+- `TelemetrySequence`
+- `HaosTelemetryAdapter`
+- `TemporalNormalizer`
+- `StateGeometryEncoder`
+- `telemetry_to_state_transition(...)`
+
+The current `State` plus `OracleEngine` path remains the stable execution kernel.
+
+The intended migration rule is:
+
+- prove HAOS parity first
+- then widen to other domains
+
+The first intended non-HAOS demo after parity is LLM reasoning trace stability.
 
 ## Oracle Routing Layer
 
