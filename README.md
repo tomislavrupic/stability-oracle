@@ -121,8 +121,10 @@ Open the main demo artifacts:
 
 The invariant language layer, metric interface, classification policy, Oracle Engine v2, and deterministic routing layer are now in place. The repository can expose HAOS-style structural stability as an agent-callable skill while keeping the research core separate from the application layer.
 
-## Next
+## Project Status
 
-- expand the public Pages surface with benchmark and integration notes
-- keep `PHYSICAL` and `FOUNDATIONAL` routing surfaces as bounded stubs until explicit implementations exist
-- continue growing the standalone package without modifying frozen research code
+- development paused
+- engine considered stable reference implementation
+- future work exploratory only
+
+No further changes are planned unless they address a bug, broken reproducibility, or a documentation typo.
